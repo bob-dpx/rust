@@ -19,3 +19,12 @@ lazy_static!{
     };
 }
 
+pub fn connection() -> Result<DbConnection,CustomError>{
+    POOL.get().map_err(|e| CustomError::new(500,format!("获取数据路连接失败:{}",e)))
+}
+
+pub fn init() {
+    lazy_static::initialize(&POOL);
+    let conn = connection().expect("获取数据路连接失败")；
+    embed_migrations::run(&conn).unwrap();
+}
