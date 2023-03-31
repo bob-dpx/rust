@@ -1,6 +1,6 @@
 use std::fmt;
 use std::fmt::Formatter;
-use actix_web::http:StatusCode;
+use actix_web::http::StatusCode;
 use actix_web::{HttpResponse,ResponseError};
 use diesel::result::Error as DieselError;
 use serde_json::json;
@@ -29,7 +29,7 @@ impl fmt::Display for CustomError{
 impl From<DieselError> for CustomError{
     fn from(error: DieselError) -> CustomError{
         match error{
-            DieselError::DatabaseError(_,err)=>CustomError::new(409,err.message().to_string())
+            DieselError::DatabaseError(_,err)=>CustomError::new(409,err.message().to_string()),
             DieselError::NotFound=>{
                 CustomError(404,"员工信息没找到".to_string())
             }

@@ -1,13 +1,13 @@
-use creata::db;
-use creata::error_handler::CustomError;
-use creata::schema::employees;
+use crate::db;
+use crate::error_handler::CustomError;
+use crate::schema::employees;
 use diesel::prelude::*;
-use serde::{Serializer,Deserialize};
+use serde::{Deserialize, Serialize};
 
 
-#[derive(Serializer,Deserialize,AsChangeset,Insertable)]
+#[derive(Serialize,Deserialize,AsChangeset,Insertable)]
 #[table_name="employees"]
-pub struct Employees{
+pub struct Employee{
     pub first_name: String,
     pub last_name: String,
     pub department: String,
@@ -15,7 +15,7 @@ pub struct Employees{
     pub age: i32,
 }
 
-#[derive(Serializer,Deserialize,AsChangeset,Insertable)]
+#[derive(Serialize,Deserialize,AsChangeset,Insertable)]
 pub struct Employees{
     pub first_name: String,
     pub last_name: String,

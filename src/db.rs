@@ -25,6 +25,6 @@ pub fn connection() -> Result<DbConnection,CustomError>{
 
 pub fn init() {
     lazy_static::initialize(&POOL);
-    let conn = connection().expect("获取数据路连接失败")；
+    let conn = connection().expect("获取数据路连接失败");
     embed_migrations::run(&conn).unwrap();
 }

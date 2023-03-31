@@ -23,7 +23,7 @@ async fn creata(employee: web::Json<Employee>)->Result<HttpResponse,CustomError>
 }
 
 #[put("/employees/{id}")]
-async fn update(id: web::Path<i32>,employee::web::Json<Employee>)->Result<HttpResponse,CustomError>{
+async fn update(id: web::Path<i32>,employee:web::Json<Employee>)->Result<HttpResponse,CustomError>{
     let employee = Employees::update(id.into_inner(),employee.into_inner())?;
     Ok(HttpResponse::Ok().json(employee))
 }
